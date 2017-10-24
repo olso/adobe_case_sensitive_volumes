@@ -15,5 +15,9 @@ run: lib_override_volume_sensitivity_check.dylib
 ifneq ($(shell whoami),root)
 	@echo "You are not root. Please rerun this command as root (sudo make run)"
 else
+	ln -s /Volumes/Adobe/Adobe\ Creative\ Cloud/ /Applications/Adobe\ Creative\ Cloud
+	ln -s /Volumes/Adobe/Utilities/Adobe\ Creative\ Cloud/ /Applications/Utilities/Adobe\ Creative\ Cloud
+	ln -s /Volumes/Adobe/Utilities/Adobe\ Application\ Manager/ /Applications/Utilities/Adobe\ Application\ Manager
+	ln -s /Volumes/Adobe/Utilities/Adobe\ Installers /Applications/Utilities/Adobe\ Installers
 	DYLD_INSERT_LIBRARIES=$(shell pwd)/lib_override_volume_sensitivity_check.dylib $(CS6_INSTALLER_PATH)
 endif
