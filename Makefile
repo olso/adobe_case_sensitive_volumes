@@ -1,4 +1,4 @@
-CS6_INSTALLER_PATH=/Volumes/CS6*/*/Install.app/Contents/MacOS/Install
+CS6_INSTALLER_PATH=/Volumes/Creative\ Cloud\ Installer/Creative\ Cloud\ Installer.app/Contents/MacOS/Install
 
 lib_override_volume_sensitivity_check.dylib: src/override_volume_sensitivity_check.c 
 	gcc -DDEBUG -ggdb -arch i386 -arch x86_64 -Wall -framework CoreServices -o lib_override_volume_sensitivity_check.dylib -dynamiclib src/override_volume_sensitivity_check.c
