@@ -1,4 +1,4 @@
-# Installing Adobe CS6 on case-sensitive drives (Mac OS X)
+# Installing Adobe CC on case-sensitive drives (Mac OS X)
 
 Well, everybody knows that Adobe are a **[censored]** company.
 Their products are the defacto standard for image/video editing and designing, but their codebase really suck. No excuses.
@@ -6,33 +6,38 @@ Their products are the defacto standard for image/video editing and designing, b
 The problem addressed here is that Creative Studio™ refuses to install on a case-sensitive drive on Mac OS X.
 And it doesn't just refuse to install on a case-sensitive drive, but it also requires to install on your *boot* drive as well! Srsly?
 
-Well, there's a solution. I've just stumbled upon [this](https://bitbucket.org/lokkju/adobe_case_sensitive_volumes), and I'm really anxious to share it.
-I've forked the code to update it for CS6.
+Well, there's a solution. [@tzvetkoff](https://github.com/tzvetkoff/adobe_case_sensitive_volumes) made a fork of [this](https://bitbucket.org/lokkju/adobe_case_sensitive_volumes), after trying I found that his code was unmantained and was working only for Adobe CS6 and for old Apple Mac OS X versions.
+
+I've forked the code to update it for CC (Creative Cloud) and for make it more easy to use on new architectures, maybe someone will need it.
+
+One another interesting thing was that his code wasn't working for new Mac OS X since Apple deprecated support for i386 kernel, so fix this issue would had its advantages.
 
 ## Prerequisites
 
 1.  `Xcode`
 
-    You can install it from [AppStore](https://itunes.apple.com/app/xcode/id497799835).
+    You can install it from [Apple AppStore](https://itunes.apple.com/app/xcode/id497799835).
 2.  Command Line Tools for Xcode.
 
-    You can install it from Xcode's `Preferences` -> `Downloads`.
+    You can install it from terminal launching `sudo xcode-select --install`
+    
+    Alternatively you can install it from Xcode's `Preferences` -> `Downloads`.
 
 ## A step-by-step installation instructions
 
-1.  Create a `.sparsebundle` pseudo-image to install CS6:
+1.  Create a `.sparsebundle` pseudo-image to install CC inside it:
 
     ``` bash
-    mkdir -p ~/Stuff/Adobe
-    cd ~/Stuff/Adobe
-    hdiutil create -size 15g -type SPARSEBUNDLE -nospotlight -volname 'Adobe CS6 SparseBundle' -fs 'Journaled HFS+' ~/Stuff/Adobe/Adobe_CS6_SparseBundle.sparsebundle
+    mkdir -p ~/Documents/Adobe
+    cd ~/Documents/Adobe
+    hdiutil create -size 30g -type SPARSEBUNDLE -nospotlight -volname 'AdobeCC' -fs 'Journaled HFS+' ~/Documents/Adobe/AdobeCC.sparsebundle
     ```
 
 2.  Mount the newly created image and create a `/Adobe` directory inside
 
     ``` bash
-    open ~/Stuff/Adobe/Adobe_CS6_SparseBundle.sparsebundle
-    mkdir -p /Volumes/Adobe\ CS6\ SparseBundle/Adobe
+    open ~/Documents/Adobe/AdobeCC.sparsebundle
+    mkdir -p /Volumes/AdobeCC/Adobe
     ```
 
 3.  Create an extra `/Applications/Adobe` folder on the boot drive (we will trick the installer with this temporary directory.)
@@ -46,8 +51,8 @@ I've forked the code to update it for CS6.
     The current one tries to find it automatically, but it *may* fail...
 
     ``` bash
-    cd ~/Stuff/Adobe
-    git clone git://github.com/tzvetkoff/adobe_case_sensitive_volumes.git
+    cd ~/Documents/Adobe
+    git clone https://github.com/RubensRainelli/adobe_case_sensitive_volumes.git
     cd adobe_case_sensitive_volumes
     make
     sudo make run
@@ -60,7 +65,7 @@ I've forked the code to update it for CS6.
 
     ``` bash
     rm -rf /Applications/Adobe
-    ln -s /Volumes/Adobe\ CS6\ SparseBundle/Adobe/ /Applications/Adobe
+    ln -s /Volumes/AdobeCC/Adobe/ /Applications/Adobe
     ```
 
 7.  Now click the `Install` button
@@ -68,8 +73,8 @@ I've forked the code to update it for CS6.
 8.  You can now safely delete the intermediate files and probably move the SparseBundle somewhere easier to mount by just clicking it (the Desktop, probably?)
 
     ``` bash
-    mv ~/Stuff/Adobe/Adobe_CS6_SparseBundle.sparsebundle ~/Desktop/Adobe_CS6_SparseBundle.sparsebundle
-    rm -rf ~/Stuff/Adobe
+    mv ~/Documents/Adobe/AdobeCC.sparsebundle ~/Desktop/AdobeCC.sparsebundle
+    rm -rf ~/Documents/Adobe
     ```
 
 9.  That's it!
@@ -79,4 +84,6 @@ I've forked the code to update it for CS6.
 
 ## Thanks
 
-[lokkju](https://bitbucket.org/lokkju), for writing [that awesome article and code](https://bitbucket.org/lokkju/adobe_case_sensitive_volumes) to start from
+[lokkju](https://bitbucket.org/lokkju), for writing [that awesome article and code](https://bitbucket.org/lokkju/adobe_case_sensitive_volumes)
+
+[@tzvetkoff](https://github.com/tzvetkoff/adobe_case_sensitive_volumes) for his improved code I've forked and updated for making it compatible with newer Mac OS X and newer Adobe CC
