@@ -87,3 +87,5 @@ One another interesting thing was that his code wasn't working for new Mac OS X 
 [lokkju](https://bitbucket.org/lokkju), for writing [that awesome article and code](https://bitbucket.org/lokkju/adobe_case_sensitive_volumes)
 
 [@tzvetkoff](https://github.com/tzvetkoff/adobe_case_sensitive_volumes) for his improved code I've forked and updated for making it compatible with newer Mac OS X and newer Adobe CC
+
+[Rashed97](https://github.com/Rashed97/adobe_case_sensitive_volumes) for some other improvements that make it working on newer MacOS X
