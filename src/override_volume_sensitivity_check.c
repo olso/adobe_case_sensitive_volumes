@@ -9,7 +9,7 @@ static OSStatus _FSGetVolumeParms(FSVolumeRefNum volume, GetVolParmsInfoBuffer *
 	int isCaseSensitive = !!(buffer->vMExtendedAttributes & (1 << bIsCaseSensitive));
 
 	if(isCaseSensitive) {
-		printf("== FSGetVolumeParms - lying and saying the volume is case insensitive, though it is case sensitive. ==\n");
+		printf("== FSGetVolumeParms - say that the volume is case insensitive, though it is case sensitive. ==\n");
 		buffer->vMExtendedAttributes &= ~(1 << bIsCaseSensitive);
 	}
 
