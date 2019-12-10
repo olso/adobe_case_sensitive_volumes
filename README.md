@@ -1,5 +1,7 @@
 # Installing Adobe CC on case-sensitive drives (Mac OS X)
 
+**DISCONTINUED, since it seems that with new MacOS it became impossible to know which MacOS X API let you get disk informations and I don't have anymore a Mac, I'm really SORRY for Adobe users, if for any case you have a spare Mac that is able to run latest MacOS X we could try to figure out how to do it**
+
 Well, everybody knows that Adobe are a **[censored]** company.
 Their products are the defacto standard for image/video editing and designing, but their codebase really suck. No excuses.
 
