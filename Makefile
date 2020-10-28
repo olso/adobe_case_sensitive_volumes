@@ -1,9 +1,10 @@
 # CC_INSTALLER_PATH=/Volumes/Creative\ Cloud\ Installer/Creative\ Cloud\ Installer.app/Contents/MacOS/Install
 CC_INSTALLER_PATH=/Volumes/Adobe/Creative\ Cloud\ Installer.app/Contents/MacOS/Install
 
-lib_override_volume_sensitivity_check.dylib: src/override_volume_sensitivity_check.c 
+lib_override_volume_sensitivity_check.dylib: src/dyld-interposing.m src/dyld-interposing.h src/override_volume_sensitivity_check.c Makefile
 #	gcc -DDEBUG -ggdb -arch i386 -arch x86_64 -Wall -framework CoreServices -o lib_override_volume_sensitivity_check.dylib -dynamiclib src/override_volume_sensitivity_check.c
-	gcc -DDEBUG -ggdb -arch x86_64 -Wall -framework CoreServices -o lib_override_volume_sensitivity_check.dylib -dynamiclib src/override_volume_sensitivity_check.c
+	# gcc -DDEBUG -ggdb -arch x86_64 -Wall -Wno-parentheses -framework CoreServices -o lib_override_volume_sensitivity_check.dylib -dynamiclib src/override_volume_sensitivity_check.c
+	gcc -DDEBUG -ggdb -arch x86_64 -Wall -Wno-parentheses -framework Foundation -o lib_override_volume_sensitivity_check.dylib -dynamiclib src/override_volume_sensitivity_check.c
 
 .PHONY: clean run
 
@@ -22,6 +23,8 @@ run: lib_override_volume_sensitivity_check.dylib
 	#
 	# run without sudo
 	DYLD_INSERT_LIBRARIES=$(shell pwd)/lib_override_volume_sensitivity_check.dylib $(CC_INSTALLER_PATH)
+	# run for nicer dtruss output
+	# $(CC_INSTALLER_PATH)
 
 # ifneq ($(shell whoami),root)
 # 	@echo "You are not root. Please rerun this command as root (sudo make run)"

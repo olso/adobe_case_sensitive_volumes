@@ -1,6 +1,22 @@
 # Installing Adobe CC on case-sensitive drives (Mac OS X)
 
 **@olso tries to continue**
+1. Found `InitErrorCaseSensitiveVolume` in `Creative Cloud Installer.app/Contents/Resources/Dictionary/en_US.json`
+2. Downloaded Cutter
+3. Searched for `InitErrorCaseSensitiveVolume` string
+4. No idea how to use it lol, I don't do low level stuff
+5. Remember reading something about `dtruss` on HN
+6. https://stackoverflow.com/questions/33476432/is-there-a-workaround-for-dtrace-cannot-control-executables-signed-with-restri#comment102149999_46689409
+7. `codesign --remove-signature Creative\ Cloud\ Installer.app/Contents/MacOS/Install`
+8. `sudo dtruss -fn make &> dtruss.log` (this will wait for make to run and attach itself to it)
+9. `make run` and wait for the error to appear, then `ctrl+c`
+10. look at the `dtruss.log` output
+11. fuck these are low level calls, I need something that can show me objectivec funcnames/classnames, fuuuuck
+12. lets try `sudo dtruss -a -s -fn make &> dtruss.log` and repeat
+13. uuuu these are some nice method names bruh
+14. fuck
+15. https://github.com/quarkslab/iMITMProtect/blob/master/override
+16. 
 
 **DISCONTINUED, since it seems that with new MacOS it became impossible to know which MacOS X API let you get disk informations and I don't have anymore a Mac, I'm really SORRY for Adobe users, if for any case you have a spare Mac that is able to run latest MacOS X we could try to figure out how to do it**
 
